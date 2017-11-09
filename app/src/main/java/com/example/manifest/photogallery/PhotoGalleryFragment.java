@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.io.IOException;
 
@@ -38,6 +39,17 @@ public class PhotoGalleryFragment extends Fragment {
         mPhotoRecyclerView = v.findViewById(R.id.photo_recycler_view);
         mPhotoRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         return v;
+    }
+
+    private class PhotoHolder extends RecyclerView.ViewHolder {
+        private TextView mTitleTextView;
+        public PhotoHolder(View itemView) {
+            super(itemView);
+            mTitleTextView = (TextView) itemView;
+        }
+        public void bindGalleryItem(GalleryItem item) {
+            mTitleTextView.setText(item.toString());
+        }
     }
 
     private class FetchItemsTask extends AsyncTask<Void,Void,Void> {
